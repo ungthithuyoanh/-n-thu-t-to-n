@@ -1,0 +1,86 @@
+
+@media only screen and (max-width: 776px){
+#slider #position-bottom{
+	position:absolute;
+	left: 35%;
+}
+}
+@media only screen and (max-width: 400px){
+#slider #position-bottom{
+	position:absolute;
+	left: 30%;
+}
+/*#menu-home li a{
+	font-size: 15px;
+}*/
+}
+nav .menu{
+background-color: #512467;
+padding: 0;
+margin: 0;
+overflow: hidden;
+font-size:18px;
+}
+nav .menu a{
+	text-decoration: none;
+	color: #fff;
+	display: inline-block;
+	padding: 15px;
+}
+nav .menu a:hover{
+	background-color: #FF0000;
+}
+nav .menu a.dong{
+	display: none;
+}
+nav i.fa-bars{
+	position: absolute;
+	right:10%;
+	margin: 8px 10px;
+	color: #fff;
+	font-size: 30px;
+	display: none;
+}
+@media only screen and (max-width: 800px){
+	nav .menu{
+		height:45px; 
+	}
+	nav .menu a{
+		display: none;
+	}
+	nav.mobile-mod{
+		text-align: center;
+		z-index: 50;
+		overflow: auto;
+		background: #fff;
+	}
+	nav.mobile-mod .menu{
+		display: block;
+	}
+	nav.mobile-mod .menu a{
+		display: block;
+		color: white;
+	}
+	nav.mobile-mod .menu a.dong{
+		font-weight: bold;
+		display: block;
+		color: #fff;
+		font-size: 20px;
+
+	}
+	nav.mobile-mod .menu a.collapse i{
+		position:relative;
+		display: inline-block;
+		color: #009698;
+		font-size: 20px;
+	}
+	nav.mobile-mod .menu a:hover{
+		background-color: #FF0000;
+	}
+	nav i.fa{
+		display:block;
+	}
+	nav.mobile-mod .menu{
+		height: 450px;
+	}
+}
