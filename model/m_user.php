@@ -8,8 +8,27 @@ class User extends Database
 	{
 		parent::__construct();
 	}
-	function queryUsername($_userName)
-	{
+	function queryAllUsers(){
+		$conn = parent::getConn();
+		$stmt = null;
+		try {
+			$stmt = $conn->prepare("SELECT id, name, username, email, sex, birthday, phone, address, verified, role, crtime FROM users");
+			$stmt->execute();
+		}catch(PDOException $e){
+	    	echo "queryAllUsers failed: " . $e->getMessage();
+	    }
+	    if($stmt->rowCount() == 0){ //không có
+	    	$stmt=null;
+	    	$conn=null;
+	    	return 0;
+	    }else{ //có
+	    	$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		    $stmt=null;
+		    $conn=null;
+		    return $data;
+		}
+	}
+	function queryUsername($_userName){
 	    //kiem tra username trong database
 		$_userName = trim($_userName);
 		//cat khoang trang 2 dau
@@ -92,7 +111,7 @@ class User extends Database
 		$conn = parent::getConn();
 		$stmt = null;
 		try {
-			$stmt = $conn->prepare('INSERT INTO users (username, password, name, email, sex, birthday, phone, address,  vkey) VALUES ( ?, ?, N'.'?'.', ?, ?, ?, ?, ?, ?)');
+			$stmt = $conn->prepare('INSERT INTO users (username, password, name, email, sex, birthday, phone, address,  vkey,role) VALUES ( ?, ?, N'.'?'.', ?, ?, ?, ?, ?, ?,?)');
 			$stmt->execute( $userArr );
 			$stmt=null;
 			$conn=null;
@@ -209,6 +228,66 @@ class User extends Database
 		    $conn=null;
 		    return 1;
 		}
+	}
+	function queryProfileAdmin($_id){
+		$conn =parent::getConn();
+		$stmt = null;
+		try {
+			$stmt = $conn->prepare('SELECT id, name, username, email, sex, birthday, phone, address, verified, role, crtime FROM users WHERE id = :id LIMIT 1');
+			$stmt->bindValue(':id', $_id);
+			$stmt->execute();
+		}catch(PDOException $e){
+	    	echo "queryProfileAdmin failed: " . $e->getMessage();
+	    }
+	    $row = $stmt->rowCount();
+	    if($row == 0 ){
+	    	$stmt=null;
+	    	$conn=null;
+	    	return 0;
+	    }else{
+	    	$data = $stmt->fetch(PDO::FETCH_ASSOC);
+		    $stmt=null;
+		    $conn=null;
+		    return $data;
+	    }
+	}
+	function updateAdminUser($id, $role){
+		$conn = parent::getConn();
+		$stmt = null;
+		try {
+			$stmt = $conn->prepare('UPDATE users SET role=? WHERE id=? LIMIT 1');
+			$stmt->bindValue(1, $role);
+			$stmt->bindValue(2, $id);
+			$stmt->execute();
+		}catch(PDOException $e){
+	    	echo "Lỗi updateAdminUser: " . $e->getMessage();
+	    }
+	    if($stmt->rowCount() > 0){
+			$stmt=null;
+			$conn=null;
+			return true;
+	    }
+		$stmt=null;
+		$conn=null;
+		return false;
+	}
+	function updateProfile($profileArr = array()){
+		$conn = parent::getConn();
+		$stmt = null;
+		try {
+			$stmt = $conn->prepare('UPDATE users SET name=N'.'?'.' , sex=? , birthday=? , phone=? , address=N'.'?'.' , verified=? WHERE id=? ');
+			$stmt->execute($profileArr);
+		}catch(PDOException $e){
+	    	echo "Lỗi update: " . $e->getMessage();
+	    }
+	    if($stmt->rowCount() > 0){
+			$stmt=null;
+			$conn=null;
+			return true;
+	    }
+		$stmt=null;
+		$conn=null;
+		return false;
 	}
 }
 ?>

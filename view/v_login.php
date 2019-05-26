@@ -48,7 +48,7 @@
 						<input type="submit" value="Đăng Nhập" class="btn btn-success"> 
 					</form>
 				</div>
-				<div class="clearfix"> </div>
+				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>

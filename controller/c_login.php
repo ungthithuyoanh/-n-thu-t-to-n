@@ -39,6 +39,8 @@ if(isset($_SESSION['name']) || isset($_SESSION['id'])){
 
 					$_SESSION['name'] = $hadUser['name'];
 
+					$_SESSION['role'] = $hadUser['role'];
+					
 					header('location:../index.php');
 				}	
 			}else{

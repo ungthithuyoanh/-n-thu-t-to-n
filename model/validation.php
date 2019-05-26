@@ -57,7 +57,12 @@ class Validation
         }
         return null;
     }
-
+    function checkRole($role){
+        if($role != 0 && $role!=2){
+            return "Bạn không có quyền sửa đổi thông tin!";
+        }
+        return null;
+    }
 	//hacker insert js vafo database
     function test_input($data) {
          $data = trim($data);

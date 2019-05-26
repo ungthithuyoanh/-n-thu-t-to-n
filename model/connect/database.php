@@ -9,7 +9,7 @@ class Database
 	private $sql = null;
 
 	function __construct(){
-		$this->url = 'mysql:host=localhost;dbname=food';
+		$this->url = 'mysql:host=localhost;dbname=fooding';
 		$this->user = 'ocd';
 		$this->pass = '123456';
 		

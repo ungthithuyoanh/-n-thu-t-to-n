@@ -14,16 +14,16 @@
 				<div class="item active">
 					<img src="../images/bg_rita.jpg" alt="Los Angeles" style="width:100%;height:400px;">
 					<div class="carousel-caption">
-						<h3>Los Angeles</h3>
-						<p>LA is always so much fun!</p>
+						<h3>Rita Relax Restaurant</h3>
+						<p>Giảm ngay 15%!</p>
 					</div>
 				</div>
 
 				<div class="item">
 					<img src="../images/bg_bo.jpg" alt="Chicago" style="width:100%;height: 400px;">
 					<div class="carousel-caption">
-						<h3>Chicago</h3>
-						<p>Thank you, Chicago!</p>
+						<h3>Bò lê lết Restaurant</h3>
+						<p>Giảm ngay 10%!</p>
 					</div>
 				</div>
 
@@ -120,7 +120,7 @@
 			<!-- <button type="submit">Submit</button> -->
 		</div>
 		
-<script type="text/javascript" charset="utf-8" async defer>
+<!-- <script type="text/javascript" charset="utf-8" async defer>
 	$('.diachi').click(function(){
 		var valDiaChi = $(".diachi").val();
 		$.ajax({
@@ -135,4 +135,4 @@
 			}
 		});
 	});
-</script>
+</script> -->

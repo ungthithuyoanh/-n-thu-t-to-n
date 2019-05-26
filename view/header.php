@@ -29,19 +29,22 @@ session_start();
 		<nav id="side-nav">
 			<i class="fa fa-bars" onclick="open_nav();"></i>	
 			<div class="menu">
-				<a href="#">Trang chủ</a>
-				<a href="#">Đặt hàng</a>
-				<a href="#">Tuyển dụng</a>
-				<a href="#">Giới thiệu</a>
+				<a href="../controller/c_index.php">Trang chủ</a>
+				<a href="#">Cửa hàng</a>
+				<a href="#gioi_thieu">Giới thiệu</a>
 				<a href="#lien_he">Liên hệ</a>
 				<?php	
 					if(isset($_SESSION['id']) && isset($_SESSION['name'])){
 						?>
 						<a href="../controller/c_logout.php" class="header-right">Đăng xuất</a>
-						<a href="#" class="header-right"><?php echo $_SESSION['name']; ?> </a>
-						<?php 
-					}else{
-						?>
+						<?php if($_SESSION['role'] == 1) {?>
+							<a href="../controller/c_adminUsers.php" class="header-right">Admin</a>
+						<?php } else if($_SESSION['role'] == 0){ ?>
+							<a href="#" class="header-right"><?php echo $_SESSION['name']; ?> </a>
+						<?php }else{ ?>
+							<a href="../controller/c_shopUsers.php" class="header-right">Cửa hàng_<?php echo $_SESSION['name']; ?> </a>
+						<?php } ?>	
+					<?php } else{ ?>
 						<a href="../controller/c_register.php" class="header-right">Đăng ký</a>
 						<a href="../controller/c_login.php" class="header-right">Đăng nhập</a>
 						<?php 

@@ -6,6 +6,9 @@
 		<h6>THÔNG TIN CỬA HÀNG</h6>
 		<p><?=$data['shop_types']?></p>
 		<h2><?=$data['name']?></h2>
+		<div class="address">
+			<?=$data['address']?>
+		</div>
 		<div class="open_time">
 			<div class="title_time">
 				<span>Mở cửa</span>

@@ -33,8 +33,7 @@ body {
 .clear {
   clear: both; }
 .clearfix{
-  height: 20px;
-  
+  /*height: 20px;*/
 }
 #header {
   display: block;
@@ -210,11 +209,15 @@ body {
     height: 100%;
     margin: 0 auto;
     padding: 0;
-    position: relative; } }
+    position: relative; 
+    padding: 10px 0px 30px;
+  } 
+}
 @media (max-width: 959px) {
   .container {
     height: 100%;
     padding: 0;
-    position: relative; } }
+    position: relative; 
+    padding:10px 0px 50px;} }
 
 /*# sourceMappingURL=datt.css.map */
