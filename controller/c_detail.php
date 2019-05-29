@@ -7,7 +7,7 @@
 		require_once("../model/m_foodshop.php");
 		$m_products = new FoodShop();
 			//lấy dữ liệu theo id
-		$data = $m_products->queryDetails($id);
+		$data = $m_products->queryDetailsFoodShop($id);
 		//không có kết quả
 		if($data==0){
 			header("location:../c_index.php");

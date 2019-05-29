@@ -58,23 +58,17 @@ if(isset($data) && $data != false):
 							<div class="form-group">
 								<label for="address">Verified: </label> <br>
 								<?php  
-									if($data['verified'] == 1){
-								 	echo "<p style='color:#155724;'>Đã xác nhận</p>";
-									}else{
-								?>
-								<input type="radio" class="single-bottom" name="verified" id="yes" value="1">
-								<label for="verified">Đã xác nhận</label>
-								<input type="radio" class="single-bottom" name="verified" id="no" value="0">
-								<label for="verified">Chưa xác nhận</label>
+									if($data['verified'] == 1){?>
+								 	<input type="radio" class="single-bottom" name="verified" id="yes" value="1" checked hidden>
+									<label for="verified" style="color: #155724;">Đã xác nhận</label>
+								<?php }else{?>
+									<input type="radio" class="single-bottom" name="verified" id="yes" value="1">
+									<label for="verified">Đã xác nhận</label>
+									<input type="radio" class="single-bottom" name="verified" id="no" value="0">
+									<label for="verified">Chưa xác nhận</label>
 								<?php } ?>
 
 								<?php 
-								// if($data['verified'] == 1){
-								// 	echo "<script>
-								// 	$('#yes').attr('checked', true);
-								// 	$('#no').attr('checked', false);
-								// 	</script>";
-								// }else
 								if($data['verified'] == 0){
 									echo "<script>
 									$('#yes').attr('checked', false);

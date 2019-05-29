@@ -28,7 +28,7 @@
 			if (isset($_POST['sex'])){
 				$sex = $_POST['sex'];
 			}
-			if (isset($_POST['birthday'])){
+			if (isset($_POST['birthday']) && $_POST['birthday'] != ''){
 				$birthday = $_POST['birthday'];
 			}
 			if (isset($_POST['phone'])){
@@ -46,17 +46,38 @@
 			if (isset($_POST['role'])){
 				$m_User->updateAdminUser($idUser, $_POST['role']);
 			}
-			echo '<div class="col-md-6 col-md-offset-3 alert alert-success" role="alert">Cập nhật thành công!</div>';
+			echo '<div class="col-md-4 col-md-offset-4 alert alert-success" role="alert">Cập nhật thành công!</div>';
 		}
 		if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete'])) {
 			$m_user->deleteIdUser($idUser);
-			echo '<div class="col-md-4 offset-4 alert alert-danger" role="alert">Xóa user thành công!</div>';
+			echo '<div class="col-md-4 col-md-offset-4 alert alert-danger" role="alert">Xóa user thành công!</div>';
 		}
 		$data = $m_user->queryProfileAdmin($idUser);
 		require_once("../view/adminUsersForm.php");
 	}else{
-		$data = $m_user->queryAllUsers();
+		$sql = "SELECT * FROM users WHERE 1=1";
+		$sql_total = "SELECT count(id) as total FROM users WHERE 1=1";
+		$total_row = $m_user->queryTotalUsers($sql_total);
+		$total_record = $total_row['total']; // tổng sô record trong table
+			//trnag hiển thị
+			$current_page =  isset($_GET['page']) ? $_GET['page'] : 1; 
+
+			$limit = 3;
+			$total_page = ceil($total_record / $limit); //hàm làm tròn lên.vd 2,3=3
+			//kiểm tra nhập page
+			if ($current_page > $total_page) {
+				$current_page = $total_page;
+			}
+			if ($current_page < 1) {
+				$current_page = 1;
+			}
+			//tính start
+			$start = ($current_page - 1 ) * $limit;
+			$sql .= " LIMIT ".$start." , ".$limit;
+			$data = $m_user->queryUserLimit($sql);
+		// $data = $m_user->queryAllUsers();
 		require_once("../view/adminUser.php");
+		require_once("../view/v_paging.php");
 	}
 
 	require_once("../view/footer.php");

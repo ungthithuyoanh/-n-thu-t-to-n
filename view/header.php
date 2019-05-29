@@ -10,6 +10,7 @@ session_start();
 	<title>Đồ án thuật toán</title>
 	<link rel="stylesheet" type="text/css" href="../css/datt.css">
 	<link rel="stylesheet" type="text/css" href="../css/menu.css">
+	<link rel="stylesheet" type="text/css" href="../css/detail.css">
 	<link rel="stylesheet" type="text/css" href="../css/reset.css">
 	<link rel="stylesheet" type="text/css" href="../css/font-awesome-4.7.0/css/font-awesome.css">
 	<script src="../js/js.js" type="text/javascript" charset="utf-8"></script>
@@ -45,7 +46,7 @@ session_start();
 							<a href="../controller/c_shopUsers.php" class="header-right">Cửa hàng_<?php echo $_SESSION['name']; ?> </a>
 						<?php } ?>	
 					<?php } else{ ?>
-						<a href="../controller/c_register.php" class="header-right">Đăng ký</a>
+						<a href="../controller/c_register.php?at=signup" class="header-right">Đăng ký</a>
 						<a href="../controller/c_login.php" class="header-right">Đăng nhập</a>
 						<?php 
 					}

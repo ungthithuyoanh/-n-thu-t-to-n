@@ -4,6 +4,14 @@ require_once('../view/header.php');
 $username = '';
 $name = '';
 $email = '';
+// $page = strstr($_SERVER['PHP_SELF'], 'at=') ;
+// echo $page;
+if(isset($_GET['at'])){
+	$at =$_GET['at']; 
+}
+if(isset($_SESSION['role']) && $_SESSION['role'] == 1){
+	require_once("../view/v_admin.php"); 
+}
 	//nhấn button đăng ký
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$username = $_POST['username'];
@@ -63,25 +71,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$_subject = "Xác nhận tài khoản Fooding!";
 		$_body = "<a href='http://localhost:8080/DATT_3/view/verifi.php?vkey=".$vkey."''><b>Xác nhận tài khoản</b></a>";
 		$sendMail->sendGmail($_subject, $_body, $email);
-		// echo "<script type='text/javascript'>
-		// 	$(document).ready(function() {
-		// 		window.alert('Đăng ký thành công! Vui lòng xác nhận email.');
-		// 	});
-		// </script>";
-
-		echo "<script type='text/javascript'>
-				$(document).ready(function() {
-					$('.card').html(function(){
-					return '
-						<h4>Cảm ơn bạn đã đăng ký! Chúng tôi đã gửi một email xác nhận đăng ký đến ".$email.". Vui lòng vào email để xác nhận đăng ký!<h4>
-						<br/>
-						<a href=\'v_login.php\' alt=\'Đăng nhập\' ><input class=\'btn btn-success btn-lg\' type=submit value=\'Đăng nhập\'></a>';
-					});
-				});
-				</script>";
-			// header('location:c_index.php');
-			}
+		if(isset($_SESSION['role']) && $_SESSION['role'] == 1)
+		{
+			// $tbDangKy = "Thêm user thành công";
+			// $button = "Đăng nhập";
+			header('location:c_adminUsers.php');	
 		}
-		require_once("../view/register.php");
-		require_once("../view/footer.php");
+		else{ 
+			$tbDangKy = "Cảm ơn bạn đã đăng ký! Chúng tôi đã gửi một email xác nhận đăng ký đến ".$email.". Vui lòng vào email để xác nhận đăng ký!";
+			$button = "Đăng nhập";
+		}
+	}
+}
+require_once("../view/register.php"); 
+require_once("../view/footer.php");
 ?>

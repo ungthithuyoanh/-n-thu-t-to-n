@@ -8,26 +8,26 @@ class User extends Database
 	{
 		parent::__construct();
 	}
-	function queryAllUsers(){
-		$conn = parent::getConn();
-		$stmt = null;
-		try {
-			$stmt = $conn->prepare("SELECT id, name, username, email, sex, birthday, phone, address, verified, role, crtime FROM users");
-			$stmt->execute();
-		}catch(PDOException $e){
-	    	echo "queryAllUsers failed: " . $e->getMessage();
-	    }
-	    if($stmt->rowCount() == 0){ //không có
-	    	$stmt=null;
-	    	$conn=null;
-	    	return 0;
-	    }else{ //có
-	    	$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		    $stmt=null;
-		    $conn=null;
-		    return $data;
-		}
-	}
+	// function queryAllUsers(){
+	// 	$conn = parent::getConn();
+	// 	$stmt = null;
+	// 	try {
+	// 		$stmt = $conn->prepare("SELECT id, name, username, email, sex, birthday, phone, address, verified, role, crtime FROM users");
+	// 		$stmt->execute();
+	// 	}catch(PDOException $e){
+	// 		echo "queryAllUsers failed: " . $e->getMessage();
+	// 	}
+	//     if($stmt->rowCount() == 0){ //không có
+	//     	$stmt=null;
+	//     	$conn=null;
+	//     	return 0;
+	//     }else{ //có
+	//     	$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	//     	$stmt=null;
+	//     	$conn=null;
+	//     	return $data;
+	//     }
+	// }
 	function queryUsername($_userName){
 	    //kiem tra username trong database
 		$_userName = trim($_userName);
@@ -66,19 +66,18 @@ class User extends Database
 			$stmt->execute();
 			
 		}catch(PDOException $e){
-	    	echo "QueryEmail failed: " . $e->getMessage();
-	    }
+			echo "QueryEmail failed: " . $e->getMessage();
+		}
 	    if($stmt->rowCount() == 0){ //không có
 	    	$stmt=null;
 	    	$conn=null;
 	    	return 0;
 	    }else{ //có
-		    $stmt=null;
-		    $conn=null;
-		    return 1;
-		}
+	    	$stmt=null;
+	    	$conn=null;
+	    	return 1;
+	    }
 	}
-
 	function queryUser($_login, $_pass){
 		$_login = trim($_login);
 		// $_pass = md5($_pass);
@@ -103,26 +102,30 @@ class User extends Database
 		}else{
 			$data = $stmt->fetch(PDO::FETCH_ASSOC);
 			$stmt=null;
-		    $conn=null;
+			$conn=null;
 			return $data;
 		}
 	}
-	public function insertUser($userArr=array()){
-		$conn = parent::getConn();
-		$stmt = null;
-		try {
-			$stmt = $conn->prepare('INSERT INTO users (username, password, name, email, sex, birthday, phone, address,  vkey,role) VALUES ( ?, ?, N'.'?'.', ?, ?, ?, ?, ?, ?,?)');
-			$stmt->execute( $userArr );
-			$stmt=null;
-			$conn=null;
-			return true;
-		}catch(PDOException $e){
-	    	echo "Lỗi insert: " . $e->getMessage();
-	    }
-		$stmt=null;
-		$conn=null;
-		return false;
-	}
+	function queryUserLimit($_sql){
+			$conn = parent::getConn();
+			$stmt = null;
+			try {
+				$stmt = $conn->prepare($_sql);
+				$stmt->execute();
+			}catch(PDOException $e){
+				echo "queryProducts failed: " . $e->getMessage();
+			}
+		    if($stmt->rowCount() == 0){ //không có
+		    	$stmt=null;
+		    	$conn=null;
+		    	return 0;
+		    }else{ //có
+	    		$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		    	$stmt=null;
+		    	$conn=null;
+		    	return$data;
+		    }
+		}
 	function queryVerified($_vkey){
 		$conn = parent::getConn();
 		$stmt = null;
@@ -131,58 +134,17 @@ class User extends Database
 			$stmt->bindValue(":vkey", $_vkey);
 			$stmt->execute();
 		}catch(PDOException $e){
-	    	echo "QueryVirified failed: " . $e->getMessage();
-	    }
+			echo "QueryVirified failed: " . $e->getMessage();
+		}
 	    if($stmt->rowCount() == 0){ //không có
 	    	$stmt=null;
 	    	$conn=null;
 	    	return 0;
 	    }else{ //có
-		    $stmt=null;
-		    $conn=null;
-		    return 1;
-		}
-	}
-	function updateVerified($_vkey){
-		$conn = parent::getConn();
-		$stmt = null;
-		try {
-			$stmt = $conn->prepare("UPDATE  users SET verified=1 WHERE vkey=:vkey LIMIT 1");
-			$stmt->bindValue(":vkey", $_vkey);
-			$stmt->execute();
-		}catch(PDOException $e){
-	    	echo "UpdateVerified failed: " . $e->getMessage();
-	    }
-	    if($stmt->rowCount() == 0){ //không có
 	    	$stmt=null;
 	    	$conn=null;
-	    	return 0;
-	    }else{ //có
-		    $stmt=null;
-		    $conn=null;
-		    return 1;
-		}
-	}
-	function updateToken($_token,$_email){
-		$conn = parent::getConn();
-		$stmt = null;
-		try {
-			$stmt = $conn->prepare("UPDATE  users SET token=:token WHERE email=:email LIMIT 1");
-			$stmt->bindValue(":token", $_token);
-			$stmt->bindValue(":email", $_email);
-			$stmt->execute();
-		}catch(PDOException $e){
-	    	echo "updateToken failed: " . $e->getMessage();
+	    	return 1;
 	    }
-	    if($stmt->rowCount() == 0){ //không có
-	    	$stmt=null;
-	    	$conn=null;
-	    	return 0;
-	    }else{ //có
-		    $stmt=null;
-		    $conn=null;
-		    return 1;
-		}
 	}
 	function queryToken($_token, $_email){
 		$conn = parent::getConn();
@@ -204,10 +166,89 @@ class User extends Database
 			return 0;
 		}else{
 			$stmt=null;
-		    $conn=null;
+			$conn=null;
 			return 1;
 		}
 	}
+	function queryTotalUsers($_sql){
+			$conn = parent::getConn();
+			$stmt = null;
+			try {
+				$stmt = $conn->prepare($_sql);
+				$stmt->execute();
+			}catch(PDOException $e){
+				echo "queryTotalUsers failed: " . $e->getMessage();
+			}
+		    if($stmt->rowCount() == 0){ //không có
+		    	$stmt=null;
+		    	$conn=null;
+		    	return 0;
+		    }else{ //có
+		    	$data = $stmt->fetch(PDO::FETCH_ASSOC);
+		    	$stmt=null;
+		    	$conn=null;
+		    	return $data;
+		    }
+		}
+	public function insertUser($userArr=array()){
+		$conn = parent::getConn();
+		$stmt = null;
+		try {
+			$stmt = $conn->prepare('INSERT INTO users (username, password, name, email, sex, birthday, phone, address,  vkey,role) VALUES ( ?, ?, N'.'?'.', ?, ?, ?, ?, ?, ?,?)');
+			$stmt->execute( $userArr );
+			$stmt=null;
+			$conn=null;
+			return true;
+		}catch(PDOException $e){
+			echo "Lỗi insert: " . $e->getMessage();
+		}
+		$stmt=null;
+		$conn=null;
+		return false;
+	}
+	
+	function updateVerified($_vkey){
+		$conn = parent::getConn();
+		$stmt = null;
+		try {
+			$stmt = $conn->prepare("UPDATE  users SET verified=1 WHERE vkey=:vkey LIMIT 1");
+			$stmt->bindValue(":vkey", $_vkey);
+			$stmt->execute();
+		}catch(PDOException $e){
+			echo "UpdateVerified failed: " . $e->getMessage();
+		}
+	    if($stmt->rowCount() == 0){ //không có
+	    	$stmt=null;
+	    	$conn=null;
+	    	return 0;
+	    }else{ //có
+	    	$stmt=null;
+	    	$conn=null;
+	    	return 1;
+	    }
+	}
+	function updateToken($_token,$_email){
+		$conn = parent::getConn();
+		$stmt = null;
+		try {
+			$stmt = $conn->prepare("UPDATE  users SET token=:token WHERE email=:email LIMIT 1");
+			$stmt->bindValue(":token", $_token);
+			$stmt->bindValue(":email", $_email);
+			$stmt->execute();
+		}catch(PDOException $e){
+			echo "updateToken failed: " . $e->getMessage();
+		}
+	    if($stmt->rowCount() == 0){ //không có
+	    	$stmt=null;
+	    	$conn=null;
+	    	return 0;
+	    }else{ //có
+	    	$stmt=null;
+	    	$conn=null;
+	    	return 1;
+	    }
+	}
+	
 	function updatePass($_pass,$_token,$_email){
 		$conn = parent::getConn();
 		$stmt = null;
@@ -217,17 +258,17 @@ class User extends Database
 			$stmt->bindValue(":email", $_email);
 			$stmt->execute();
 		}catch(PDOException $e){
-	    	echo "updateToken failed: " . $e->getMessage();
-	    }
+			echo "updateToken failed: " . $e->getMessage();
+		}
 	    if($stmt->rowCount() == 0){ //không có
 	    	$stmt=null;
 	    	$conn=null;
 	    	return 0;
 	    }else{ //có
-		    $stmt=null;
-		    $conn=null;
-		    return 1;
-		}
+	    	$stmt=null;
+	    	$conn=null;
+	    	return 1;
+	    }
 	}
 	function queryProfileAdmin($_id){
 		$conn =parent::getConn();
@@ -237,19 +278,19 @@ class User extends Database
 			$stmt->bindValue(':id', $_id);
 			$stmt->execute();
 		}catch(PDOException $e){
-	    	echo "queryProfileAdmin failed: " . $e->getMessage();
-	    }
-	    $row = $stmt->rowCount();
-	    if($row == 0 ){
-	    	$stmt=null;
-	    	$conn=null;
-	    	return 0;
-	    }else{
-	    	$data = $stmt->fetch(PDO::FETCH_ASSOC);
-		    $stmt=null;
-		    $conn=null;
-		    return $data;
-	    }
+			echo "queryProfileAdmin failed: " . $e->getMessage();
+		}
+		$row = $stmt->rowCount();
+		if($row == 0 ){
+			$stmt=null;
+			$conn=null;
+			return 0;
+		}else{
+			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+			$stmt=null;
+			$conn=null;
+			return $data;
+		}
 	}
 	function updateAdminUser($id, $role){
 		$conn = parent::getConn();
@@ -260,13 +301,13 @@ class User extends Database
 			$stmt->bindValue(2, $id);
 			$stmt->execute();
 		}catch(PDOException $e){
-	    	echo "Lỗi updateAdminUser: " . $e->getMessage();
-	    }
-	    if($stmt->rowCount() > 0){
+			echo "Lỗi updateAdminUser: " . $e->getMessage();
+		}
+		if($stmt->rowCount() > 0){
 			$stmt=null;
 			$conn=null;
 			return true;
-	    }
+		}
 		$stmt=null;
 		$conn=null;
 		return false;
@@ -278,16 +319,40 @@ class User extends Database
 			$stmt = $conn->prepare('UPDATE users SET name=N'.'?'.' , sex=? , birthday=? , phone=? , address=N'.'?'.' , verified=? WHERE id=? ');
 			$stmt->execute($profileArr);
 		}catch(PDOException $e){
-	    	echo "Lỗi update: " . $e->getMessage();
-	    }
-	    if($stmt->rowCount() > 0){
+			echo "Lỗi update: " . $e->getMessage();
+		}
+		if($stmt->rowCount() > 0){
 			$stmt=null;
 			$conn=null;
 			return true;
-	    }
+		}
 		$stmt=null;
 		$conn=null;
 		return false;
+	}
+	function deleteIdUser($idUser){
+		$conn = parent::getConn();
+		$stmt = null;
+		try {
+			$stmt = $conn->prepare("
+				DELETE FROM products WHERE type_id=:id;
+				DELETE FROM types_products WHERE shop_id=:id;
+				DELETE FROM foodshop WHERE user_id=:id;  
+				DELETE FROM users WHERE id=:id LIMIT 1");
+			$stmt->bindValue(':id', $idUser);
+			$stmt->execute();
+		}catch(PDOException $e){
+			echo "deleteIdUser failed: " . $e->getMessage();
+		}
+		if($stmt->rowCount() > 0){
+			$stmt=null;
+			$conn=null;
+			return true;
+		}else{
+			$stmt=null;
+			$conn=null;
+			return false;
+		}
 	}
 }
 ?>

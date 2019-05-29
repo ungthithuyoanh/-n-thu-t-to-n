@@ -1,4 +1,14 @@
 <div class="container">
+	<div>
+		<a href="../controller/c_register.php?at=add">
+			<button type="button" class="btn btn-outline-success">Thêm User</button>
+		</a>
+	</div>
+	<div class="col-md-4">
+		<h3 style="color: #FF0000;">
+			Danh sách User: <?=$total_record?>
+		</h3>
+	</div>
 	<table class="table table-hover" >
 		<thead class="thead-dark" style="background-color: #555555;">
 			<tr style="color: #fff; font-size: 16px; font-weight: bold;">
@@ -80,11 +90,6 @@
 				<?php } endif; ?>
 		</tbody>
 	</table>
-	<div>
-		<a href="../controller/c_adminAddUsers.php"">
-			<button type="button" class="btn btn-outline-success">Thêm User</button>
-		</a>
-	</div>
 </div>
 
 
