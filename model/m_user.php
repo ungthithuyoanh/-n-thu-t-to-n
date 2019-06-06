@@ -189,7 +189,93 @@ class User extends Database
 		    	$conn=null;
 		    	return $data;
 		    }
+	}
+	function queryProfileAdmin($_id){
+		$conn =parent::getConn();
+		$stmt = null;
+		try {
+			$stmt = $conn->prepare('SELECT id, name, username, email, sex, birthday, phone, address, verified, role, crtime FROM users WHERE id = :id LIMIT 1');
+			$stmt->bindValue(':id', $_id);
+			$stmt->execute();
+		}catch(PDOException $e){
+			echo "queryProfileAdmin failed: " . $e->getMessage();
 		}
+		$row = $stmt->rowCount();
+		if($row == 0 ){
+			$stmt=null;
+			$conn=null;
+			return 0;
+		}else{
+			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+			$stmt=null;
+			$conn=null;
+			return $data;
+		}
+	}
+	function queryProfile($_id){
+		$conn =parent::getConn();
+		$stmt = null;
+		try {
+			$stmt = $conn->prepare('SELECT name, username, email, sex, birthday, phone, address FROM users WHERE id=:id ');
+			$stmt->bindValue(':id', $_id);
+			$stmt->execute();
+		}catch(PDOException $e){
+	    	echo "Query failed: " . $e->getMessage();
+	    }
+
+	    $row = $stmt->rowCount();
+	    
+	    if($row == 0 ){
+	    	$stmt=null;
+	    	$conn=null;
+	    	return 0;
+	    }else{
+	    	$data = $stmt->fetch(PDO::FETCH_ASSOC);
+		    $stmt=null;
+		    $conn=null;
+		    return $data;
+	    }
+	}
+	function queryPassword($_id, $_password){
+		$conn = parent::getConn();
+		$stmt = null;
+		try {
+			$stmt = $conn->prepare("SELECT id, password FROM users WHERE password=:password AND id=:id");
+			$stmt->bindValue(':password', $_password);
+			$stmt->bindValue(':id', $_id);
+			$stmt->execute();
+		}catch(PDOException $e){
+	    	echo "Error query password: " . $e->getMessage();
+	    }
+	    if($stmt->rowCount() > 0){
+			$stmt=null;
+			$conn=null;
+			return true;
+	    }
+		$stmt=null;
+		$conn=null;
+		return false;
+	}
+	function updatePassword($_id, $_password){
+		$conn = parent::getConn();
+		$stmt = null;
+		try {
+			$stmt = $conn->prepare('UPDATE users SET password=:password WHERE id=:id ');
+			$stmt->bindValue(':password', $_password);
+			$stmt->bindValue(':id', $_id);
+			$stmt->execute();
+		}catch(PDOException $e){
+	    	echo "Error update password: " . $e->getMessage();
+	    }
+	    if($stmt->rowCount() > 0){
+			$stmt=null;
+			$conn=null;
+			return true;
+	    }
+		$stmt=null;
+		$conn=null;
+		return false;
+	}
 	public function insertUser($userArr=array()){
 		$conn = parent::getConn();
 		$stmt = null;
@@ -270,28 +356,7 @@ class User extends Database
 	    	return 1;
 	    }
 	}
-	function queryProfileAdmin($_id){
-		$conn =parent::getConn();
-		$stmt = null;
-		try {
-			$stmt = $conn->prepare('SELECT id, name, username, email, sex, birthday, phone, address, verified, role, crtime FROM users WHERE id = :id LIMIT 1');
-			$stmt->bindValue(':id', $_id);
-			$stmt->execute();
-		}catch(PDOException $e){
-			echo "queryProfileAdmin failed: " . $e->getMessage();
-		}
-		$row = $stmt->rowCount();
-		if($row == 0 ){
-			$stmt=null;
-			$conn=null;
-			return 0;
-		}else{
-			$data = $stmt->fetch(PDO::FETCH_ASSOC);
-			$stmt=null;
-			$conn=null;
-			return $data;
-		}
-	}
+	
 	function updateAdminUser($id, $role){
 		$conn = parent::getConn();
 		$stmt = null;

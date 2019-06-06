@@ -6,7 +6,7 @@
 		!isset($_SESSION['role']) ||
 		($_SESSION['role']!="1")
 	){
-		header("location:index.php");
+		header("location:c_index.php");
 	}
 	require_once("../model/m_user.php");
 	require_once("../view/v_admin.php");

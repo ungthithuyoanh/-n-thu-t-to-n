@@ -10,9 +10,9 @@ $at =$_GET['at'];
 				<div class="card-header">
 					<?php if(isset($at)) {
 						if($at == "add") {?>
-							<h2 style="color: red;">Thêm User</h2>
+							<h2 align="center" style="color: red; font-weight: bold;">Thêm User</h2>
 						<?php }else{ ?>
-							<h2 style="color: red;">Đăng ký User</h2>
+							<h2 align="center" style="color: red; font-weight: bold;">Đăng ký User</h2>
 						<?php }} ?>
 					</div>
 					<div class="card-body">
@@ -66,17 +66,23 @@ $at =$_GET['at'];
 									<span class='text-danger'><?=$passErr?></span>
 								<?php endif ?>
 							</div>
-							<input type="submit" value="Đăng ký" class="btn btn-success">
-						</form>
+							<?php if(isset($at)) {
+								if($at == "add") {?>
+									<input type="submit" value="Thêm User" class="btn btn-success">
+								<?php }else{ ?>
+									<input type="submit" value="Đăng ký" class="btn btn-success">
+								<?php }} ?>
+
+							</form>
+						</div>
 					</div>
 				</div>
-			</div>
-			<!-- end register  -->
-	<?php }else{ ?>
-		<h4 style="color: #AAAAAA; width: 78%;"><?=$tbDangKy?></h4>
-		<a href="../controller/c_login.php" class="header-right">
-			<input class='btn btn-success btn-lg' type=submit value='<?=$button?>'>
-		</a>
-	<?php } ?>
-	</div>
+				<!-- end register  -->
+			<?php }else{ ?>
+				<h4 style="color: #AAAAAA; width: 78%;"><?=$tbDangKy?></h4>
+				<a href="../controller/c_login.php" class="header-right">
+					<input class='btn btn-success btn-lg' type=submit value='<?=$button?>'>
+				</a>
+			<?php } ?>
+		</div>
 	<!--end container-->

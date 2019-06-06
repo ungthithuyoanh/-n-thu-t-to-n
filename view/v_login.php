@@ -4,7 +4,8 @@
 		<div class="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2">
 			<div class="card">
 				<div class="card-header">
-					<h2>Đăng nhập</h2>
+
+					<h2 style="font-weight: bold;">Đăng nhập</h2>
 				</div>
 				<div class="card-body">
 					<?php 

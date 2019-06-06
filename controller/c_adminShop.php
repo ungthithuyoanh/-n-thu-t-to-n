@@ -39,7 +39,7 @@
 		//lấy dữ liệu theo id
 		$data = $m_foodshop->queryDetailsFoodShop($idProduct);
 		echo "<script type='text/javascript' charset='utf-8'>$(document).ready(function(){ $('#nav-home').show(); });</script>";
-		require_once("../view/v_adminShopForm.php");
+		require_once("../view/v_adminShopForm1.php");
 	}else{
 		$sql = "SELECT fs.*, users.name as nameuser FROM foodshop fs , users WHERE fs.user_id = users.id";
 		$sql_total = "SELECT count(id) as total FROM foodshop WHERE 1=1";

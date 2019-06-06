@@ -43,19 +43,77 @@
 				<div style="color: #252525; font-size: 14px;">6.000đ/km</div>
 			</div>
 		</div>
-	<!-- </div> -->
-</div>
+		<!-- </div> -->
+	</div>
+	<div id="mota">
+		<div class="container">	
+			<div id="menu">	
+				<a href="#_thuc_don">Thực đơn</a>
+				<a href="#_binh_luan">Bình luận</a>
+			</div>
+			<div id="_thuc_don" style="clear: both;">
+				<div id="menu1" class="col-md-2">
+					aa
+				</div>
+				<div id="menu2" class="col-md-5 col-md-offset-1">
+					<form action="../controller/c_search.php" class="form-inline my-2 my-lg-0" method="GET">
+						<p>
+							<i class="fas fa-search"></i>
+							<input class="form-control mr-sm-2" name="search" id="search"	type="search" placeholder="Nhập tên sản phẩm" aria-label="Search" required>
+						</p>					
+					</form>
+					<div id="form">
+						<div>
+							<div id="Trà" class="titleProduct">
+								<div class="content">
+									Trà
+								</div>
+							</div>
+							<div id="product" class="row" style="clear: left;">
+								<div class="col-md-2" style="float: left;">
+									<img src="../images/p1_gg2.jpg">
+								</div>
+								<p class="col-md-7 namePr" style="float: left;">Bún ốc</p>
+								<p class="col-md-3 costPr" style="float: right;">39.000đ</p>
+							</div>
+							<div id="product" class="row" style="clear: left;">
+								<div class="col-md-2" style="float: left;">
+									<img src="../images/p1_gg2.jpg">
+								</div>
+								<p class="col-md-7 namePr" style="float: left;">Bún ốc</p>
+								<p class="col-md-3 costPr" style="float: right;">39.000đ</p>
+							</div>
+						</div>
+						<div id="Trà" class="titleProduct">
+							<div class="content">
+								Trà
+							</div>
+						</div>
+						<div id="product" class="row" style="clear: left;">
+							<div class="col-md-2" style="float: left;">
+								<img src="../images/p1_gg2.jpg">
+							</div>
+							<p class="col-md-7 namePr" style="float: left;">Bún ốc</p>
+							<p class="col-md-3 costPr" style="float: right;">39.000đ</p>
+						</div>
+						<div id="product" class="row" style="clear: left;">
+							<div class="col-md-2" style="float: left;">
+								<img src="../images/p1_gg2.jpg">
+							</div>
+							<p class="col-md-7 namePr" style="float: left;">Bún ốc</p>
+							<p class="col-md-3 costPr" style="float: right;">39.000đ</p>
+						</div>	
+						<div>Menu của cửa hàng: "A Hải "</div>
+					</div>
 
-<div id="mota">
-	<div class="container">	
-		<div id="menu">	
-			Thực đơn
-		</div>
-		<div id="menu1">
-			
-		</div>
-		<div id="menu2">
-			
+				</div>
+				<div id="menu3" class="col-md-3 col-md-offset-1">
+					bas
+				</div>
+			</div>
+
+			<div id="_binh_luan" style="clear: both;">
+				aaaa
+			</div>
 		</div>
 	</div>
-</div>

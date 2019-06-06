@@ -1,101 +1,94 @@
-<?php 
-	if(isset($data) && $data != false): 
+<?php if ($_SESSION['role'] == 3){ ?>
+<div class="col-md-offset-2" style="clear: both;">
+	<a href="../controller/c_addShopFood.php">
+		<button type="button" class="btn btn-outline-success ">Thêm cửa hàng</button>
+	</a>
+</div>
+<?php } ?>
+<div class="container">
+	<?php if ($_SESSION['role'] == 3){ ?>
+	<div class="col-md-4">
+		<h3 style="color: #FF0000;">
+			Danh sách cửa hàng: <?=$total_record?>
+		</h3>
+	</div>
+	<?php } ?>
+	<div class="col-md-6 col-md-offset-3" style="clear: both;">
+		<?php if (isset($data)): 
+			foreach ($data as $row) {	
 		?>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 offset-3">
-					<div id="Shopfood">
-						<div class="card-header">
-							<h2 align="center">Thông tin cửa hàng</h2>
+			<div id="Shopfood">
+				<div class="card-header">
+					<h2 align="center" style="font-weight: bold; color: #AA0000"><?=$row['name']?></h2>
+				</div>
+				<div class="card-body">
+					<form action="" method="POST" >
+						<div class="form-group" style="display: none;">
+							<label for="id">ID: </label>
+							<input type="text" class="form-control" name="id" id='id' minlength="6" maxlength="100" value="<?=$row['id']?>">
 						</div>
-						<div class="card-body">
-							<form action="" method="POST" >
-								<div class="form-group">
-									<label for="id">ID: </label>
-									<input type="text" class="form-control" name="id" id='id' minlength="6" maxlength="100" value="<?=$data['id']?>" disabled>
-								</div>
-								<div class="form-group">
-									<label for="img">Image: </label>
-									<div class="img-detail" >
-										<img src="../images/<?=$data['img']?>" alt="<?=$data['name']?>">
-									</div>
-									<br>
-									<input type="text" class="form-control" name="img" id='img' minlength="2" maxlength="100" value="<?=$data['img']?>" required>
-								</div>
-								<div class="form-group">
-									<label for="name">Name: </label>
-
-									<input type="text" class="form-control" name="name" id='name' minlength="6" maxlength="100" value="<?=$data['name']?>" required>
-								</div>
-								<div class="form-group">
-									<label for="gender">Gender: </label>
-									<label for="male">Male</label>
-									<input type="radio" class="single-bottom" name="gender" id="male" value="Nam">
-									<label for="female">Female</label>
-									<input type="radio" class="single-bottom" name="gender" id="female" value="Nữ">
-								</div>
-								<div class="form-group">
-									<label for="types">Types: </label>
-									<select class="form-control" name="types" id="types" class="form-control">
-										<option value="Giày Sneaker">Giày Sneaker</option>
-										<option value="Giày Boot">Giày Boot</option>
-										<option value="Giày Lười">Giày Lười</option>
-										<option value="Giày Cao Gót">Giày Cao Gót</option>
-										<option value="Giày Tây">Giày Tây</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<label for="cost">Cost: (VND)</label><br/>
-									<input type="text" class="form-control" name="cost" id='cost' value="<?=$data['cost']?>" required>
-								</div>
-								<div class="form-group">
-									<label for="describes">Describes: </label>
-									<textarea class="form-control" name="describes" id="describes" placeholder="Nhập mô tả" required value=""></textarea>
-								</div>
-								<div class="form-group">
-									<label for="phone">Creation time: </label>
-									<?php $dateCr = date_create($data['crtime']);
-									$dateCr = date_format($dateCr, ' H:i:s \, d-m-Y');
-									echo $dateCr; ?>
-								</div>
-								<div class="form-group">
-									<label for="phone">Update time: </label>
-									<?php $dateUp = date_create($data['updateTime']);
-									$dateUp = date_format($dateUp, ' H:i:s \, d-m-Y');
-									echo $dateUp; ?>
-								</div>
-								<div class="form-group">
-									<button type="submit" name="update" class="btn btn-success">Update</button>
-									<button type="submit" name="delete" class="btn btn-danger">Delete</button>
-
-								</div>
-							</form>
+						<div class="form-group">
+							<label for="img">Image: </label>
+							<div class="img-detail" >
+								<img src="../images/<?=$row['img']?>" alt="<?=$row['name']?>" style="width: 100%; height: auto;">
+							</div>
 						</div>
-					</div>
+						<div class="form-group">
+							<label for="name">Name: </label>
+							<input type="text" class="form-control" name="name" id='name' minlength="6" maxlength="100" value="<?=$row['name']?>" required>
+						</div>
+						<div class="form-group">
+							<label for="address">Address: </label>
+							<input type="text" class="form-control" name="address" id='address' minlength="6" maxlength="100" value="<?=$row['address']?>" required>
+						</div>
+						<div class="form-group">
+							<label for="open_time">Open-Time: </label>
+							<input type="text" class="form-control" name="open_time" id='open_time' minlength="6" maxlength="100" value="<?=$row['open_time']?>" required>
+						</div>						
+						<div class="form-group">
+							<label for="shop_type">Shop Types: </label>
+							<select class="form-control" name="shop_type" id="shop_type" class="form-control">
+								<option value="<?=$row['shop_types']?>"><?=$row['shop_types']?></option>
+								<option value="Quán Ăn">Quán Ăn</option>
+								<option value="Cafe/Dessert">Cafe/Dessert</option>
+								<option value="Ăn chay">Ăn chay</option>
+								<option value="Tiệm Bánh">Tiệm Bánh</option>
+								<option value="Ăn vặt/vỉa hè">Ăn vặt/vỉa hè</option>
+								<option value="Ăn vặt/vỉa hè">Nhà Hàng</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="cost">Cost: (VND)</label><br/>
+							<input type="text" class="form-control" name="cost" id='cost' value="<?=$row['cost']?>">
+						</div>
+						<div class="form-group">
+							<label for="phone">Creation time: </label>
+							<?php $dateCr = date_create($row['crtime']);
+							$dateCr = date_format($dateCr, ' H:i:s \, d-m-Y');
+							echo $dateCr; ?>
+						</div>
+						<div class="form-group" name="updateTime">
+							<label for="phone">Update time: </label>
+							<?php $dateUp = date_create($row['updateTime']);
+							$dateUp = date_format($dateUp, ' H:i:s \, d-m-Y');
+							echo $dateUp; ?>
+						</div>
+						<div class="form-group">
+							<button type="submit" name="update" class="btn btn-success">Update</button>
+							<button type="submit" name="delete" class="btn btn-danger">Delete</button>
+
+						</div>
+					</form>
 				</div>
 			</div>
-		</div>
-<?php endif ?>
-	<!-- <?php 
-	// if(strcmp($data['gender'], 'Nam') == 0){
-		// echo "<script>$('#male').attr('checked', true);
-		// $('#female').attr('checked', false);</script>";
-	// }elseif(strcmp($data['gender'], 'Nữ') == 0){
-		// echo "<script>$('#male').attr('checked', false);
-		// $('#female').attr('checked', true);</script>";
-	// }
-	// echo "<script>$('#describes').val('".$data['describes']."')</script>"; 
-	// echo '<script type="text/javascript">
-	// $(document).ready(function() {
-	// 	$("#types option[value=\''.$data['types'].'\']").attr("selected", "selected");
-	// 	});
-	// 	</script>';
-	?> -->
-		<!-- <?php 
-	// endif; 
-		?> -->
-	<!-- <script type="text/javascript">
-		$(document).ready(function() {
-			document.title = 'Quản trị Products';
-		});
-	</script> -->
+		<?php }endif; ?>
+	</div>
+</div>	
+
+<script src="../js/ajax.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		document.title = 'Quản trị ShopFooding';
+	});
+</script>

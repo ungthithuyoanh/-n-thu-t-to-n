@@ -1,5 +1,5 @@
 <div class="col-md-offset-2">
-	<a href="../controller/c_adminAddShop.php">
+	<a href="../controller/c_addShopFood.php">
 		<button type="button" class="btn btn-outline-success ">Thêm cửa hàng</button>
 	</a>
 </div>

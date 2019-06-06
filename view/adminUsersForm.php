@@ -6,7 +6,7 @@ if(isset($data) && $data != false):
 			<div class="col-md-6 col-md-offset-3">
 				<div class="card">
 					<div class="card-header">
-						<h2 align="center">User Profile</h2>
+						<h2 align="center" style="color: red; font-weight: bold;">Thông tin User</h2>
 					</div>
 					<div class="card-body">
 						<form action="" method="POST" >

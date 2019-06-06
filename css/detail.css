@@ -8,6 +8,103 @@
 #menu{
 	text-transform: uppercase;
 	font-weight: 700;
-    color: #cf2127;
-    padding: 13px 26px;
+	color: #cf2127;
+	font-size: 16px;
+	padding: 13px 26px;
+}
+#menu1{
+	background: #fff;
+	height: auto;
+}
+
+#menu2{
+	background: #fff;
+	height: auto;
+	padding-top: 15px;
+}
+#menu3{
+	background: #fff;
+	height: auto;
+}
+
+#menu2 p{
+	margin: 0;
+	position: relative;
+	color: #46464c;
+	/*border: solid 1px red;*/
+}
+
+#menu2 p i{
+	position: absolute;
+	padding: 15px;
+	line-height: 10px;
+}
+#menu2 p input{
+	width: 100%;
+	padding: 0 40px;
+	border: 0;
+	border: 1px solid #ededed;
+	height: 40px;
+}
+#menu2 #form{
+	height: auto;
+	margin-bottom: 5px;
+}
+#form .titleProduct{
+	height: 40px;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+}
+#form .titleProduct .content{
+	text-transform: uppercase;
+	color: #6d6f71;
+	padding: 5px 0 0;
+	margin: 10px 0 10px;
+}
+
+#form #product{
+	height: 71px;
+    margin: 5px 0px 0px;
+    width: 100%;
+    border-bottom: 2px solid #f5f5f5;
+}
+#form #product img{
+	width: 60px;
+	height: 60px; 
+}
+#form #product .namePr{
+    color: #464646;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form #product .costPr{
+    color: #0288d1;;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/*css cho dropdown thong tin cá nhân*/
+.dropdown-menu{
+	width: 165px;
+	height: 100px
+}
+.thongtinCN{
+	padding: 8px 31px 22px 20px;
+	color: black;
+	text-decoration: none;
+}
+.thongtinCN:hover{
+	background-color: #eee;
+	text-decoration: none;
+}
+.thongtinMK{
+	padding: 22px 61px 14px 20px;
+	color: black;
+	text-decoration: none;
+}
+.thongtinMK:hover{
+	background-color: #eee;
+	text-decoration: none;
 }

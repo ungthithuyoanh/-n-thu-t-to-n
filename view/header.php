@@ -35,22 +35,26 @@ session_start();
 				<a href="#gioi_thieu">Giới thiệu</a>
 				<a href="#lien_he">Liên hệ</a>
 				<?php	
-					if(isset($_SESSION['id']) && isset($_SESSION['name'])){
-						?>
-						<a href="../controller/c_logout.php" class="header-right">Đăng xuất</a>
-						<?php if($_SESSION['role'] == 1) {?>
-							<a href="../controller/c_adminUsers.php" class="header-right">Admin</a>
-						<?php } else if($_SESSION['role'] == 0){ ?>
-							<a href="#" class="header-right"><?php echo $_SESSION['name']; ?> </a>
-						<?php }else{ ?>
-							<a href="../controller/c_shopUsers.php" class="header-right">Cửa hàng_<?php echo $_SESSION['name']; ?> </a>
-						<?php } ?>	
-					<?php } else{ ?>
-						<a href="../controller/c_register.php?at=signup" class="header-right">Đăng ký</a>
-						<a href="../controller/c_login.php" class="header-right">Đăng nhập</a>
-						<?php 
-					}
-					?>	
+				if(isset($_SESSION['id']) && isset($_SESSION['name'])){
+					?>
+					<a href="../controller/c_logout.php" class="header-right">Đăng xuất</a>
+					<?php if($_SESSION['role'] == 1) {?>
+						<a href="../controller/c_adminUsers.php" class="header-right">Admin</a>
+					<?php } else if($_SESSION['role'] == 3 || $_SESSION['role'] == 2){ ?>
+						<a href="../controller/c_shopFood.php" class="header-right">
+							Cửa hàng_<?php echo $_SESSION['name']; ?>
+						</a>
+					<?php }else{ ?>
+						<a href="../controller/c_profile.php" class="header-right">
+							<?php echo $_SESSION['name']; ?> 
+						</a>
+					<?php } ?>	
+				<?php } else{ ?>
+					<a href="../controller/c_register.php?at=signup" class="header-right">Đăng ký</a>
+					<a href="../controller/c_login.php" class="header-right">Đăng nhập</a>
+					<?php 
+				}
+				?>	
 				<a href="javascript:;" class="dong"><i class="fa fa-times" onclick="close_nav();">Close</i></a>
 			</div>
 		</nav>

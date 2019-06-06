@@ -13,33 +13,24 @@ require_once('connect/database.php');
 	    	parent::__construct();
 	    }
 
-	 //    function queryFoodShop($diachi){
-
-	 //    	$conn = parent::getConn();
-	 //    	$stmt = null;
-	 //    	if($diachi == null){
-	 //    		$diachi = '1=1';
-	 //    	}
-	 //    	try {
-	 //    		$stmt = $conn->prepare("SELECT * FROM foodshop  WHERE ".$diachi);
-	 //    		$stmt->execute();
-	 //    	} catch (PDOException $e) {
-	 //    		echo "No foodshop: ".$e->getMessage();
-	 //    	}
-
-	 //    	if( $stmt->rowCount() == 0 ){ //không có
-	 //    		$stmt=null;
-	 //    		$conn=null;
-	 //    		return 0;
-		//     }else{ //có
-		//     	$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		//     	$stmt=null;
-		//     	$conn=null;
-		//     	return $data;
-		//     }
-		// }
-		function countRowFoodShop(){
-			$conn = parent::getConn();
+	    public function insertShop($userArr=array()){
+	    	$conn = parent::getConn();
+	    	$stmt = null;
+	    	try {
+	    		$stmt = $conn->prepare('INSERT INTO foodshop (name, shop_types, address, open_time, cost, img,  user_id) VALUES ( N'.'?'.', N'.'?'.', N'.'?'.', ?, ?, ?, ?)');
+	    		$stmt->execute( $userArr );
+	    		$stmt=null;
+	    		$conn=null;
+	    		return true;
+	    	}catch(PDOException $e){
+	    		echo "Lỗi insert: " . $e->getMessage();
+	    	}
+	    	$stmt=null;
+	    	$conn=null;
+	    	return false;
+	    }
+	    function countRowFoodShop(){
+	    	$conn = parent::getConn();
 	    	$stmt = null;
 
 	    	try {
@@ -62,21 +53,21 @@ require_once('connect/database.php');
 		}
 		function queryLimitFoodShop($sql,$diachi){
 			$conn = parent::getConn();
-	    	$stmt = null;
-	    	if($diachi == null){
-	    		$diachi = " 1 = 1 ";
-	    	}
-	    	else {
-	    		$diachi = 'address like "%N'.$diachi.'%" ';
-	    	}
-	    	$sql= "SELECT * FROM foodshop WHERE".$diachi . $sql;
-	    	try {
-	    		$stmt = $conn->prepare($sql);
-	    		$stmt->execute();
-	    	} catch (PDOException $e) {
-	    		echo "No foodshop: ".$e->getMessage();
-	    	}
-	    	$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$stmt = null;
+			if($diachi == null){
+				$diachi = " 1 = 1 ";
+			}
+			else {
+				$diachi = 'address like "%N'.$diachi.'%" ';
+			}
+			$sql= "SELECT * FROM foodshop WHERE".$diachi . $sql;
+			try {
+				$stmt = $conn->prepare($sql);
+				$stmt->execute();
+			} catch (PDOException $e) {
+				echo "No foodshop: ".$e->getMessage();
+			}
+			$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	    	if( $stmt->rowCount() == 0 ){ //không có
 	    		$stmt=null;
 	    		$conn=null;
@@ -97,12 +88,13 @@ require_once('connect/database.php');
 			} catch (PDOException $e) {
 				echo 'queryDetails failed: '.$e.getMessage();
 			}
+			$data = $stmt->fetch(PDO::FETCH_ASSOC);
 			if( $stmt->rowCount() == 0 ){ //không có
-	    		$stmt=null;
-	    		$conn=null;
-	    		return $data;
+				$stmt=null;
+				$conn=null;
+				return $data;
 		    }else{ //có
-		    	$data = $stmt->fetch(PDO::FETCH_ASSOC);
+		    	
 		    	$stmt=null;
 		    	$conn=null;
 		    	return $data;
@@ -112,21 +104,70 @@ require_once('connect/database.php');
 			$conn = parent::getConn();
 			$stmt = null;
 			try {
-				$stmt = $conn->prepare("UPDATE foodshop SET name=N"."?"." , gender=N"."?"." , types=N"."?"." , cost=? , img=?, describes=N"."?"." , updateTime=now() WHERE id=? LIMIT 1");
+				$stmt = $conn->prepare("UPDATE foodshop SET name=N"."?"." , shop_types=N"."?"." , address=N"."?"." ,open_time = ? ,cost=? ,user_id=? , updateTime=now() WHERE id = ? ");
 				$stmt->execute($productArr);
 			}catch(PDOException $e){
-		    	echo "Lỗi updateProducts: " . $e->getMessage();
-		    }
-		    if($stmt->rowCount() > 0){
+				echo "Lỗi updateProducts: " . $e->getMessage();
+			}
+			if($stmt->rowCount() > 0){
 				$stmt=null;
 				$conn=null;
 				return true;
-		    }
+			}
 			$stmt=null;
 			$conn=null;
 			return false;
 		}
+		function queryNameShop($_nameShop){
+	    //kiem tra nameShop trong database
+			$_nameShop = trim($_nameShop);
+			$conn = parent::getConn();
+			$stmt = null;
+			try {
+				$stmt = $conn->prepare("SELECT name, branch_id FROM foodshop WHERE name=:name");
 
+				$stmt->bindValue(":name", $_nameShop);
+
+				$stmt->execute();
+
+			}catch(PDOException $e){
+				echo "QueryUserName failed: " . $e->getMessage();
+			}
+
+		    if( $stmt->rowCount() == 0 ){ //không có
+		    	$stmt=null;
+		    	$conn=null;
+		    	return 0;
+		    }else{ //có
+		    	$data = $stmt->fetch(PDO::FETCH_ASSOC);
+		    	$stmt=null;
+		    	$conn=null;
+		    	return $data;
+		    }
+		}
+		function queryAddress( $_address ){
+		//ktra qAddress tồn tại hay chưa
+		$_address = trim($_address);
+		$conn = parent::getConn();
+		$stmt = null;
+		try {
+			$stmt = $conn->prepare("SELECT address FROM foodshop WHERE address=:address");
+			$stmt->bindValue(":address", $_address);
+			$stmt->execute();
+			
+		}catch(PDOException $e){
+			echo "QueryEmail failed: " . $e->getMessage();
+		}
+	    if($stmt->rowCount() == 0){ //không có
+	    	$stmt=null;
+	    	$conn=null;
+	    	return 0;
+	    }else{ //có
+	    	$stmt=null;
+	    	$conn=null;
+	    	return 1;
+	    }
+	}
 		function queryFoodShop($_sql){
 			$conn = parent::getConn();
 			$stmt = null;
@@ -141,31 +182,10 @@ require_once('connect/database.php');
 		    	$conn=null;
 		    	return 0;
 		    }else{ //có
-	    		$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		    	$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		    	$stmt=null;
 		    	$conn=null;
 		    	return$data;
-		    }
-		}
-		function queryNameUsers($_iduser){
-			$conn = parent::getConn();
-			$stmt = null;
-			try {
-				$stmt = $conn->prepare("SELECT name FROM users  WHERE id=:id LIMIT 1");
-				$stmt->bindValue(":id",$_iduser);
-				$stmt->execute();
-			}catch(PDOException $e){
-				echo "queryTotalProducts failed: " . $e->getMessage();
-			}
-		    if($stmt->rowCount() == 0){ //không có
-		    	$stmt=null;
-		    	$conn=null;
-		    	return 0;
-		    }else{ //có
-		    	$data = $stmt->fetch(PDO::FETCH_ASSOC);
-		    	$stmt=null;
-		    	$conn=null;
-		    	return $data;
 		    }
 		}
 		function queryTotalFoodShop($_sql){
@@ -199,9 +219,9 @@ require_once('connect/database.php');
 				echo 'queryDetails failed: '.$e.getMessage();
 			}
 			if( $stmt->rowCount() == 0 ){ //không có
-	    		$stmt=null;
-	    		$conn=null;
-	    		return $data;
+				$stmt=null;
+				$conn=null;
+				return $data;
 		    }else{ //có
 		    	$data = $stmt->fetch(PDO::FETCH_ASSOC);
 		    	$stmt=null;
@@ -213,21 +233,21 @@ require_once('connect/database.php');
 			$conn = parent::getConn();
 			$stmt = null;
 			try {
-				$stmt = $conn->prepare("DELETE FROM carts WHERE idproduct=:id LIMIT 1; DELETE FROM orders WHERE idproduct=:id LIMIT 1; DELETE FROM shoesProducts WHERE id=:id LIMIT 1");
+				$stmt = $conn->prepare("DELETE FROM types_products WHERE shop_id=:id; DELETE FROM foodshop WHERE id=:id");
 				$stmt->bindValue(':id', $idProduct);
 				$stmt->execute();
 			}catch(PDOException $e){
 				echo "deleteIdCart failed: " . $e->getMessage();
-		    }
-		    if($stmt->rowCount() > 0){
-		    	$stmt=null;
+			}
+			if($stmt->rowCount() > 0){
+				$stmt=null;
 				$conn=null;
 				return true;
-		    }else{
+			}else{
 				$stmt=null;
 				$conn=null;
 				return false;
-		    }
+			}
 		}
 	}
-?>
+	?>
