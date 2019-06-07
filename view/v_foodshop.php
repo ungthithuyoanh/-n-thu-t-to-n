@@ -10,7 +10,7 @@
 						<option value="Liên Chiểu">Liên Chiểu</option>
 					</select>
 					<select name="shop_type" id="shop_type" class="form-control">
-						<option value="-1">Loại cửa hàng</option>
+						<option value="-1">Danh mục</option>
 						<option value="Quán ăn">Quán ăn</option>
 						<option value="Ăn Chay">Ăn Chay</option>
 						<option value="Tiệm Bánh">Tiệm Bánh</option>

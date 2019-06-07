@@ -173,7 +173,9 @@ body {
       #body #address_product .khung .address_1_1 #hinh_anh {
         height: 50%; }
         #body #address_product .khung .address_1_1 #hinh_anh img {
-          width: 100%; } }
+          width: 100%; 
+          /*height: 200px;*/
+          } }
 @media (max-width: 900px){
   .shop{
     width: 85%;

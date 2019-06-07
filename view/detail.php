@@ -63,10 +63,13 @@
 						</p>					
 					</form>
 					<div id="form">
+						<?php if ( $data1!= 0 ):
+							foreach ( $data1 as $row1) {
+						?>
 						<div>
 							<div id="Trà" class="titleProduct">
 								<div class="content">
-									Trà
+									<p><?=$row1['types']?></p>
 								</div>
 							</div>
 							<div id="product" class="row" style="clear: left;">
@@ -76,14 +79,15 @@
 								<p class="col-md-7 namePr" style="float: left;">Bún ốc</p>
 								<p class="col-md-3 costPr" style="float: right;">39.000đ</p>
 							</div>
-							<div id="product" class="row" style="clear: left;">
+							<!-- <div id="product" class="row" style="clear: left;">
 								<div class="col-md-2" style="float: left;">
 									<img src="../images/p1_gg2.jpg">
 								</div>
 								<p class="col-md-7 namePr" style="float: left;">Bún ốc</p>
 								<p class="col-md-3 costPr" style="float: right;">39.000đ</p>
-							</div>
+							</div> -->
 						</div>
+					<?php }endif ?>
 						<div id="Trà" class="titleProduct">
 							<div class="content">
 								Trà

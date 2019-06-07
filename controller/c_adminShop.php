@@ -45,17 +45,17 @@
 		$sql_total = "SELECT count(id) as total FROM foodshop WHERE 1=1";
 		$link = "";
 		//tìm kiếm địa chỉ
-			if(isset($_GET["address"]) && ($_GET["address"]!="-1")){
-				$address = $_GET["address"];
-				$sql_total .=  " AND address like '%".$address."%'";
-				$sql .= " AND address like '%".$address."%'";
-				$link.="address=".$address."&";
-				echo '<script type="text/javascript">
-				$(document).ready(function() {
-					$("#address option[value=\''.$address.'\']").attr("selected", "selected");
-					});
-					</script>';
-				}
+		if(isset($_GET["address"]) && ($_GET["address"]!="-1")){
+			$address = $_GET["address"];
+			$sql_total .=  " AND address like N'%".$address."%'";
+			$sql .= " AND fs.address like N'%".$address."%'";
+			$link.="address=".$address."&";
+			echo '<script type="text/javascript">
+			$(document).ready(function() {
+				$("#address option[value=\''.$address.'\']").attr("selected", "selected");
+				});
+				</script>';
+		}
 		//kieu cửa hàng
 		if(isset($_GET["shop_type"]) && ($_GET["shop_type"]!="-1")){
 			$types = $_GET["shop_type"];

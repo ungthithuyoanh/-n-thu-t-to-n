@@ -5,12 +5,26 @@
 		$id = $_GET['id'];
 		require_once("../view/header.php");
 		require_once("../model/m_foodshop.php");
-		$m_products = new FoodShop();
+		require_once("../model/m_product.php");
+		$m_foodshop = new FoodShop();
+		
 			//lấy dữ liệu theo id
-		$data = $m_products->queryDetailsFoodShop($id);
+		$data = $m_foodshop->queryDetailsFoodShop($id);
+
+		//lấy sản phẩm
+		$m_products = new Product();
+
+		$data1 = $m_products->queryProduct($id);
+		// $data1=array($data1);
+		// foreach ($data1 as $value) {
+		// echo $value['id'];
+		// }
 		//không có kết quả
 		if($data==0){
-			header("location:../c_index.php");
+			header("location:c_index.php");
+		}
+		if($data1==0){
+			header("location:c_index.php");
 		}
 		// if($_SERVER['REQUEST_METHOD'] == 'POST'){ //add cart
 		// 	if(!isset($_SESSION['id']) || !isset($_SESSION['name']) || !isset($_SESSION['role'])){ //kiem tra login

@@ -1,4 +1,4 @@
-<div class="col-md-offset-2">
+<div class="col-md-offset-2 col-xs-offset-2">
 	<a href="../controller/c_addShopFood.php">
 		<button type="button" class="btn btn-outline-success ">Thêm cửa hàng</button>
 	</a>
@@ -9,16 +9,18 @@
 			Danh sách cửa hàng: <?=$total_record?>
 		</h3>
 	</div>
-	<div class="col-md-5 col-md-offset-3" id="filter" style="padding-top: 15px;">
+	<div class="" id="filter" style="padding-top: 15px; float: right;">
 		<form action="" class="form-inline" method="GET">
 			<select name="address" id="address" class="form-control">
 				<option value="-1">Địa chỉ</option>
 				<option value="Hải Châu">Hải Châu</option>
 				<option value="Thanh Khê">Thanh Khê</option>
 				<option value="Liên Chiểu">Liên Chiểu</option>
+				<option value="Cẩm Lệ">Cẩm Lệ</option>
+				<option value="Sơn Trà">Sơn Trà</option>
 			</select>
 			<select name="shop_type" id="shop_type" class="form-control">
-				<option value="-1">Loại cửa hàng</option>
+				<option value="-1">Danh mục</option>
 				<option value="Quán ăn">Quán ăn</option>
 				<option value="Ăn Chay">Ăn Chay</option>
 				<option value="Tiệm Bánh">Tiệm Bánh</option>
