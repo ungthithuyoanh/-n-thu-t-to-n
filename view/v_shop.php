@@ -1,8 +1,9 @@
 <?php $page = strstr($_SERVER['PHP_SELF'], 'c_') ?>
 <!-- cắt chuỗi lấy link -->
 <div class="container">
+	<?php if ($_SESSION['role'] == 3){ ?>
 	<h1 style="color: #660099;">Thông tin cửa hàng_<?=$_SESSION['name']?></h1>
-	<!-- <h1>THÔNG TIN</h1> -->
+	<?php } ?>
 	<ul class="nav nav-tabs">
 		<li class="<?php echo ($page == "c_shopFood.php" ? "active" : "")?>">
 			<a href="../controller/c_shopFood.php">Quản lý cửa hàng</a>

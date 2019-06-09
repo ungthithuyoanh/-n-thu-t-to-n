@@ -23,7 +23,7 @@ session_start();
 	<div id="header" class="widget-section" >
 		<div id="logo" class="widget-element">
 			<img src="../images/logoweb.png" alt="logo">
-		</div>	
+		</div>
 	</div>
 	<div class="clear"></div>
 	<div id="nav" >
@@ -31,7 +31,6 @@ session_start();
 			<i class="fa fa-bars" onclick="open_nav();"></i>	
 			<div class="menu">
 				<a href="../controller/c_index.php">Trang chủ</a>
-				<a href="#">Cửa hàng</a>
 				<a href="#gioi_thieu">Giới thiệu</a>
 				<a href="#lien_he">Liên hệ</a>
 				<?php	
@@ -40,9 +39,13 @@ session_start();
 					<a href="../controller/c_logout.php" class="header-right">Đăng xuất</a>
 					<?php if($_SESSION['role'] == 1) {?>
 						<a href="../controller/c_adminUsers.php" class="header-right">Admin</a>
-					<?php } else if($_SESSION['role'] == 3 || $_SESSION['role'] == 2){ ?>
+					<?php } else if($_SESSION['role'] == 3 ){ ?>
 						<a href="../controller/c_shopFood.php" class="header-right">
 							Cửa hàng_<?php echo $_SESSION['name']; ?>
+						</a>
+					<?php } else if($_SESSION['role'] == 2){ ?>
+						<a href="../controller/c_profile.php" class="header-right">
+							Đăng ký Shop_<?php echo $_SESSION['name']; ?>
 						</a>
 					<?php }else{ ?>
 						<a href="../controller/c_profile.php" class="header-right">

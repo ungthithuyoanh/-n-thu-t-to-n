@@ -13,6 +13,12 @@
 					Đổi mật khẩu
 				</a>
 		</li>
-		
+
+		<?php if($_SESSION['role'] == 0){ ?>
+			<li class="<?php echo ($page == "c_changeProfile.php" ? "active" : "")?>">
+				<a class="thongtinMK" href="../controller/c_changeProfile.php">
+					Đăng ký Cửa hàng
+			</li>
+		<?php } ?>
 		<br>
 	</div>

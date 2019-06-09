@@ -35,5 +35,27 @@
 		    	return $data;
 		    }
 		}
+		function queryProductUser($sql,$id){
+			$conn = parent::getConn();
+			$stmt = null;
+			try {
+				$stmt = $conn->prepare($sql);
+				$stmt->bindValue(":id",$id);
+				$stmt->execute();
+			} catch (PDOException $e) {
+				echo 'queryProductUser failed: '.$e.getMessage();
+			}
+			
+			if( $stmt->rowCount() == 0 ){ //không có
+				$stmt=null;
+				$conn=null;
+				return 0;
+		    }else{ //có
+		    	$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		    	$stmt=null;
+		    	$conn=null;
+		    	return $data;
+		    }
+		}
 	}
 ?>

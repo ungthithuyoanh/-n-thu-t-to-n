@@ -147,27 +147,27 @@ require_once('connect/database.php');
 		}
 		function queryAddress( $_address ){
 		//ktra qAddress tồn tại hay chưa
-		$_address = trim($_address);
-		$conn = parent::getConn();
-		$stmt = null;
-		try {
-			$stmt = $conn->prepare("SELECT address FROM foodshop WHERE address=:address");
-			$stmt->bindValue(":address", $_address);
-			$stmt->execute();
-			
-		}catch(PDOException $e){
-			echo "QueryEmail failed: " . $e->getMessage();
+			$_address = trim($_address);
+			$conn = parent::getConn();
+			$stmt = null;
+			try {
+				$stmt = $conn->prepare("SELECT address FROM foodshop WHERE address=:address");
+				$stmt->bindValue(":address", $_address);
+				$stmt->execute();
+				
+			}catch(PDOException $e){
+				echo "QueryEmail failed: " . $e->getMessage();
+			}
+		    if($stmt->rowCount() == 0){ //không có
+		    	$stmt=null;
+		    	$conn=null;
+		    	return 0;
+		    }else{ //có
+		    	$stmt=null;
+		    	$conn=null;
+		    	return 1;
+		    }
 		}
-	    if($stmt->rowCount() == 0){ //không có
-	    	$stmt=null;
-	    	$conn=null;
-	    	return 0;
-	    }else{ //có
-	    	$stmt=null;
-	    	$conn=null;
-	    	return 1;
-	    }
-	}
 		function queryFoodShop($_sql){
 			$conn = parent::getConn();
 			$stmt = null;
@@ -175,7 +175,7 @@ require_once('connect/database.php');
 				$stmt = $conn->prepare($_sql);
 				$stmt->execute();
 			}catch(PDOException $e){
-				echo "queryProducts failed: " . $e->getMessage();
+				echo "queryFoodShop failed: " . $e->getMessage();
 			}
 		    if($stmt->rowCount() == 0){ //không có
 		    	$stmt=null;
@@ -195,7 +195,7 @@ require_once('connect/database.php');
 				$stmt = $conn->prepare($_sql);
 				$stmt->execute();
 			}catch(PDOException $e){
-				echo "queryTotalProducts failed: " . $e->getMessage();
+				echo "queryTotalFoodShop failed: " . $e->getMessage();
 			}
 		    if($stmt->rowCount() == 0){ //không có
 		    	$stmt=null;

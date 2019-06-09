@@ -15,7 +15,7 @@
 	require_once("../view/v_shop.php");
 
 	$m_foodshop = new FoodShop();
-	// $_iduser = $_SESSION['id'];
+	$_iduser = $_GET["edit"];
 	if(isset($_GET["edit"])){
 		$idProduct = $_GET["edit"];
 	if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["update"])) {

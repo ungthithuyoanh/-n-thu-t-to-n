@@ -18,9 +18,11 @@
 			foreach ($data as $row) {	
 		?>
 			<div id="Shopfood">
+				<?php if ($_SESSION['role'] == 3){ ?>
 				<div class="card-header">
 					<h2 align="center" style="font-weight: bold; color: #AA0000"><?=$row['name']?></h2>
 				</div>
+				<?php } ?>
 				<div class="card-body">
 					<form action="" method="POST" >
 						<div class="form-group" style="display: none;">
