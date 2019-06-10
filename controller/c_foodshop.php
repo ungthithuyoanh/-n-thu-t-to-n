@@ -91,9 +91,9 @@
 
 	$sqlTotal= "SELECT count(id) as total FROM foodshop WHERE 1=1";
 	$countTotal = $m_foodshop->queryTotalFoodShop($sqlTotal);
-	$startNew = $countTotal['total']-2;
+	$startNew = $countTotal['total']-1;
 
-	$sql = "SELECT *  FROM foodshop WHERE 1=1 LIMIT ".$startNew.", 2";
+	$sql = "SELECT *  FROM foodshop WHERE 1=1 LIMIT ".$startNew.", 1";
 	$dataNew = $m_foodshop->queryFoodShop($sql);
 
 	require_once('../view/v_foodshop.php');

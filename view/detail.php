@@ -1,4 +1,5 @@
-<div class="container">
+
+<div class="container" id="_trang_chu">
 	<div class="col-md-5 col-md-offset-0 col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1">
 		<img src="../images/<?=$data['img']?>" alt="<?=$data['name']?>" style = "width: 100%; height: auto;">
 	</div>
@@ -53,84 +54,120 @@
 </div>
 <div id="mota">
 	<div class="container">	
-		<div id="menu">	
-			<a href="#_thuc_don">Thực đơn</a>
-			<a href="#_binh_luan">Bình luận</a>
-		</div>
-		<div id="_thuc_don">
-			<div id="menu1" class="col-md-2">
-				<div class="menu_restaurant_category">
-					<div class="item">
-						<a href="#Tra" class="link">
-							<span id="45173" title="Combo Hot chỉ bán trên Now" class="item-link active">Combo Hot chỉ bán trên Now</span>
-						</a>
-					</div>
-					<div class="item">
-						<a href="#Tra">
-							<span id="45173" title="Combo" class="item-link active">Combo</span>
-						</a>
+		<div id="menu" class="col-md-3">	
+			<div class="col-md-12">
+				<a href="#_trang_chu" class="col-md-10">Trang chủ
+					<span style="float: right;">></span>
+				</a>
+			</div>
+			<div class="col-md-12">
+				<a id="show" href="#_thuc_don" class="col-md-10">Thực đơn 
+					<span style="float: right;">></span>
+				</a>
+				<div id="menu1" class="col-md-12">
+					<div class="menu_restaurant_category">
+						<?php if ( $categoryData != 0): ?>
+							<?php foreach ($categoryData as $typeRow): ?>
+								<div class="item">
+									<a href="#<?=$typeRow['id']?>Type" class="link">
+										<span id="45173" title="Combo Hot chỉ bán trên Now" class="item-link active"><?=$typeRow['types']?></span>
+
+									</a>
+								</div>
+							<?php endforeach; ?>
+						<?php endif ?>
 					</div>
 				</div>
 			</div>
-			<div id="menu2" class="col-md-5 col-md-offset-1">
-				<div id="menu2_2" >
-					<form action="../controller/c_search.php" class="form-inline my-2 my-lg-0" method="GET">
-						<p>
-							<i class="fas fa-search"></i>
-							<input class="form-control mr-sm-2" name="search" id="search"	type="search" placeholder="Nhập tên sản phẩm" aria-label="Search" required>
-						</p>					
-					</form>
-					<div id="form">
-						<?php if ( $data1!= 0 ):
-							foreach ( $data1 as $row1) {
-								?>
-								<div>
-									<div id="Trà" class="titleProduct">
-										<div class="content">
-											<p><?=$row1['types']?></p>
+			<!-- <div class="col-md-12">
+				<a href="#_binh_luan" class="col-md-10">Bình luận
+					<span style="float: right;">></span>
+				</a>
+			</div> -->
+		</div>
+		<div class="col-md-9">
+			<div id="_thuc_don" class="col-md-12">
+				<div id="menu2" class="col-md-10">
+					<div id="menu2_2" >
+						<form action="../controller/c_search.php" class="form-inline my-2 my-lg-0" method="GET">
+							<p>
+								<i class="fas fa-search"></i>
+								<input class="form-control mr-sm-2" name="search" id="search"	type="search" placeholder="Nhập tên sản phẩm" aria-label="Search" required>
+							</p>					
+						</form>
+						<div id="form">
+							<?php if ( $categoryData != 0 ):
+								foreach ( $categoryData as $typeRow) {
+									?>								
+									<div>
+										<div id="<?=$typeRow['id']?>Type" class="titleProduct">
+											<div class="content">
+												<p><?=$typeRow['types']?></p>
+											</div>
 										</div>
+										<?php if ($productArr[$typeRow['id']] != 0 ): ?>
+
+											<?php foreach ($productArr[$typeRow['id']] as $product): ?>
+
+												<div id="product" class="row" style="clear: left;">
+													<div class="col-md-2" style="float: left;">
+														<img src="../images/<?=$product['img']?>">
+													</div>
+													<p class="col-md-8 namePr" style="float: left;"><?=$product['name']?></p>
+													<p class="col-md-2 costPr" style="float: right;"><?=$product['price']?>.000đ</p>
+												</div>
+											<?php endforeach ?>
+										<?php endif ?>
+
 									</div>
-									<div id="product" class="row" style="clear: left;">
-										<div class="col-md-2" style="float: left;">
-											<img src="../images/p1_gg2.jpg">
-										</div>
-										<p class="col-md-7 namePr" style="float: left;">Bún ốc</p>
-										<p class="col-md-3 costPr" style="float: right;">39.000đ</p>
+								<?php }endif ?>
+							</div>
+
+							<div>Menu của cửa hàng: "A Hải "</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <h3>Bình luận cửa hàng</h3>
+			<div id="_binh_luan" class="col-md-12">
+				<div id="menu2" class="col-md-10 col-md-offset-2">
+					<div id="menu2_2" >
+						<div id="form">
+							<div>
+								<div class="titleProduct">
+									<div class="content">
+										<a href="Link" class="profile">ten user</a><br>
+										<a href="#" class="profile">ten quán</a>
 									</div>
 								</div>
-						<?php }endif ?>
+								<?php if ($productArr[$typeRow['id']] != 0 ): ?>
+
+									<?php foreach ($productArr[$typeRow['id']] as $product): ?>
+
+										<div id="product" class="row" style="clear: left;">
+											<div class="col-md-2" style="float: left;">
+												<img src="../images/<?=$product['img']?>">
+											</div>
+											<p class="col-md-7 namePr" style="float: left;"><?=$product['name']?></p>
+											<p class="col-md-3 costPr" style="float: right;"><?=$product['price']?>.000đ</p>
+										</div>
+									<?php endforeach ?>
+								<?php endif ?>
+							</div>
 					</div>
-					<div id="form">
-						<div id="Tra" class="titleProduct">
-							<div class="content">
-								Trà
-							</div>
-						</div>
-						<div id="product" class="row" style="clear: left;">
-							<div class="col-md-2" style="float: left;">
-								<img src="../images/p1_gg2.jpg">
-							</div>
-							<p class="col-md-7 namePr" style="float: left;">Bún ốc</p>
-							<p class="col-md-3 costPr" style="float: right;">39.000đ</p>
-						</div>
-						<div id="product" class="row" style="clear: left;">
-							<div class="col-md-2" style="float: left;">
-								<img src="../images/p1_gg2.jpg">
-							</div>
-							<p class="col-md-7 namePr" style="float: left;">Bún ốc</p>
-							<p class="col-md-3 costPr" style="float: right;">39.000đ</p>
-						</div>	
-					</div>
+
 					<div>Menu của cửa hàng: "A Hải "</div>
 				</div>
-			</div>
-			<div id="menu3" class="col-md-2 col-md-offset-1">
-				bas
-			</div>
+			</div> -->
 		</div>
-
-	<div id="_binh_luan" style="clear: both;">
-		aaaa
 	</div>
 </div>
 </div>
+</div>
+<script> 
+	$(document).ready(function(){
+		$("#show").click(function(){
+			$("#menu1").slideToggle("slow");
+		});
+	});
+</script>

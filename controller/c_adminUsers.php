@@ -62,7 +62,7 @@
 			//trnag hiển thị
 			$current_page =  isset($_GET['page']) ? $_GET['page'] : 1; 
 
-			$limit = 3;
+			$limit = 5;
 			$total_page = ceil($total_record / $limit); //hàm làm tròn lên.vd 2,3=3
 			//kiểm tra nhập page
 			if ($current_page > $total_page) {

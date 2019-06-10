@@ -4,6 +4,7 @@
 }
 #mota{
 	background-color: #f2f2f2;
+	padding-top: 20px;
 }
 #menu{
 	text-transform: uppercase;
@@ -22,6 +23,7 @@
     /*width: 235px;*/
     margin-left: 20px;
     border-radius: 4px;
+    display: none;
 }
 .menu_restaurant_category{
 	position: relative;
@@ -145,4 +147,8 @@
 .thongtinMK:hover{
 	background-color: #eee;
 	text-decoration: none;
+}
+
+#_thuc_don{
+	padding-bottom: 25px;
 }

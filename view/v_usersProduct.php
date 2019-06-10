@@ -9,24 +9,6 @@
 			Danh sách sản phẩm: <?=$total_record?>
 		</h3>
 	</div>
-	<div class="" id="filter" style="padding-top: 15px; float: right;">
-		<form action="" class="form-inline" method="GET">
-			<select name="address" id="address" class="form-control">
-				<option value="-1">Địa chỉ</option>
-				<option value="Hải Châu">Hải Châu</option>
-				<option value="Thanh Khê">Thanh Khê</option>
-				<option value="Liên Chiểu">Liên Chiểu</option>
-				<option value="Cẩm Lệ">Cẩm Lệ</option>
-				<option value="Sơn Trà">Sơn Trà</option>
-			</select>
-			<select name="cost" id="cost" class="form-control">
-				<option value="-1">Giá</option>
-				<option value="1">Thấp - Cao</option>
-				<option value="2">Cao - Thấp</option>
-			</select>
-			<button class="btn btn-outline-success" type="submit">Lọc</button>
-		</form>
-	</div>
 	<table class="table table-striped">
 		<thead class="thead-dark" style="background-color: #555555;">
 			<tr style="color: #fff; font-size: 16px; font-weight: bold;">

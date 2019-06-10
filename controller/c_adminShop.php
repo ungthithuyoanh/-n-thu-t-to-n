@@ -101,8 +101,23 @@
 		}	
 		//lấy dữ liệu theo id
 		$data = $m_foodshop->queryDetailsFoodShop($idProduct);
-		echo "<script type='text/javascript' charset='utf-8'>$(document).ready(function(){ $('#nav-home').show(); });</script>";
+		require_once("../model/m_user.php");
+		$user = new User();
+		$userData = $user->queryProfile($data['user_id']);
 		require_once("../view/v_adminShopForm.php");
+
+		echo "<script>$('#nameShop').val('".$userData['name']."')</script>";
+		echo "<script>$('#usernameShop').val('".$userData['username']."')</script>";
+		echo "<script>$('#emailShop').val('".$userData['email']."')</script>";
+		if(strcmp($userData['sex'], 'Nam') == 0){
+			echo "<script>$('#maleShop').attr('checked', true);$('#femaleShop').attr('checked', false);</script>";
+		}elseif(strcmp($userData['sex'], 'Nữ') == 0){
+			echo "<script>$('#maleShop').attr('checked', false);$('#femaleShop').attr('checked', true);</script>";
+		}
+		echo "<script>$('#birthdayShop').val('".$userData['birthday']."')</script>";
+		echo "<script>$('#phoneShop').val('".$userData['phone']."')</script>";
+		echo "<script>$('#addressShop').val('".$userData['address']."')</script>";
+
 	}else{
 		$sql = "SELECT fs.*, users.name as nameuser FROM foodshop fs , users WHERE fs.user_id = users.id";
 		$sql_total = "SELECT count(id) as total FROM foodshop WHERE 1=1";

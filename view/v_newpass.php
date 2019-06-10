@@ -1,6 +1,9 @@
 <div class="container">
   <?php if(!isset($errNotFound) && !isset($errLink) && !isset($thongbao)){ ?>
-      <form method="POST">
+      <div class="card-header">
+            <h2 align="center" style="color: red; font-weight: bold;">Thay đổi mật khẩu</h2>
+          </div>
+      <form method="POST" class="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2">
         <div class="form-group">
           <label for="exampleInputPassword1">Password</label>
           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="pass">
