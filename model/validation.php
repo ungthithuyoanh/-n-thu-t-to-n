@@ -63,6 +63,13 @@ class Validation
         }
         return null;
     }
+
+    function checkComment($comment){
+        if (empty($comment)){
+            return "Vui lòng nhập comment!";
+        }
+        return null;
+    }
 	//hacker insert js vafo database
     function test_input($data) {
          $data = trim($data);

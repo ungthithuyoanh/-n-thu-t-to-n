@@ -18,11 +18,13 @@ session_start();
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	<link REL="SHORTCUT ICON" HREF="../images/title.jpg">
 </head>
 <body>
 	<div id="header" class="widget-section" >
 		<div id="logo" class="widget-element">
-			<img src="../images/logoweb.png" alt="logo">
+			<!-- <img src="../images/logoweb.png" alt="logo"> -->
+			<h1 style="margin-top: 15px; font-weight: bold; color:#620c70; font-style: italic; font-family: Comic Sans MS cursive; ">Fooding</h1>
 		</div>
 	</div>
 	<div class="clear"></div>
