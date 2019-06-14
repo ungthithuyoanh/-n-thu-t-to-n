@@ -34,11 +34,11 @@
 		    	return $data;
 		    }
 	    }
-	    function queryProductByTypeId($idType){
+	    function queryProductByTypeId($idType, $name){
 	    	$conn = parent::getConn();
 			$stmt = null;
 			try {
-				$stmt = $conn->prepare("select id, name, price, img from products where type_id = :type_id");
+				$stmt = $conn->prepare("select id, name, price, img from products where type_id = :type_id and ".$name);
 				$stmt->bindValue(":type_id",$idType);
 				$stmt->execute();
 			} catch (PDOException $e) {

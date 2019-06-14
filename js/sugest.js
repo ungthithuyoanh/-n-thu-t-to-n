@@ -4,7 +4,7 @@ $(document).ready(function()
     var submit   = $("button[type='submit']");
      
     //khi thực hiện kích vào nút Login
-    submit.click(function()
+    $('#sugest').click(function()
     {
         //khai báo các biến
         var email = $("input[name='email']").val(); //lấy giá trị input tài khoản

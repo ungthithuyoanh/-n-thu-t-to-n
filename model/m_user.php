@@ -8,26 +8,7 @@ class User extends Database
 	{
 		parent::__construct();
 	}
-	// function queryAllUsers(){
-	// 	$conn = parent::getConn();
-	// 	$stmt = null;
-	// 	try {
-	// 		$stmt = $conn->prepare("SELECT id, name, username, email, sex, birthday, phone, address, verified, role, crtime FROM users");
-	// 		$stmt->execute();
-	// 	}catch(PDOException $e){
-	// 		echo "queryAllUsers failed: " . $e->getMessage();
-	// 	}
-	//     if($stmt->rowCount() == 0){ //không có
-	//     	$stmt=null;
-	//     	$conn=null;
-	//     	return 0;
-	//     }else{ //có
-	//     	$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	//     	$stmt=null;
-	//     	$conn=null;
-	//     	return $data;
-	//     }
-	// }
+
 	function queryUsername($_userName){
 	    //kiem tra username trong database
 		$_userName = trim($_userName);

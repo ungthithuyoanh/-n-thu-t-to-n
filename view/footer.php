@@ -19,11 +19,11 @@
 					<label for="exampleInputEmail1">Comment:</label><br>
 					<textarea  type="text" class="form-control" id="exampleInputComment" name="comment" placeholder="Phản hồi"></textarea>
 				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" class="btn btn-primary" id="sugest">Submit</button>
 				<span id="note"></span>
-				<?php if(isset($thongbao)) {?>
-				<span id="phan_hoi"><?=$thongbao?></span>
-			<?php } ?>
+				<!-- <?php if(isset($tbao)) {?>
+				<span id="phan_hoi"><?=$tbao?></span>
+			<?php } ?> -->
 			</form>
 		</div>
 	</div>

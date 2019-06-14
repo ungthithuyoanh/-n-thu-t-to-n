@@ -12,7 +12,7 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner">
 			<div class="item active">
-				<img src="../images/bg_rita.jpg" alt="Los Angeles" style="width:100%;height:400px;">
+				<img src="../images/bg_Hanatei_Restaurant.jpg" alt="Los Angeles" style="width:100%;height:400px;">
 				<div class="carousel-caption">
 					<h3>Rita Relax Restaurant</h3>
 					<p>Giảm ngay 15%!</p>
@@ -28,7 +28,7 @@
 			</div>
 
 			<div class="item">
-				<img src="../images/banner-2.png" alt="New York" style="width:100%;height: 400px;">
+				<img src="../images/bg-Chicland.jpg" alt="New York" style="width:100%;height: 400px;">
 				<div class="carousel-caption">
 					<h3>New York</h3>
 					<p>We love the Big Apple!</p>

@@ -2,7 +2,7 @@
   box-sizing: border-box; }
 
 body {
-  font-family: sans-serif;
+  font-family:serif!important;/* sans-serif;*/
   margin: 0px;
   padding: 0px; }
 .shop{

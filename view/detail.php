@@ -85,14 +85,14 @@
 				</a>
 			</div> -->
 		</div>
-		<div class="col-md-9">
+		<div class="col-md-9 result">
 			<div id="_thuc_don" class="col-md-12">
 				<div id="menu2" class="col-md-10">
 					<div id="menu2_2" >
-						<form action="../controller/c_search.php" class="form-inline my-2 my-lg-0" method="GET">
+						<form class="form-inline my-2 my-lg-0">
 							<p>
 								<i class="fas fa-search"></i>
-								<input class="form-control mr-sm-2" name="search" id="search"	type="search" placeholder="Nhập tên sản phẩm" aria-label="Search" required>
+								<input class="form-control mr-sm-2" name="search" id="search"	type="search" placeholder="Nhập tên sản phẩm" aria-label="Search" required onkeyup="showHint(this.value, <?= $data['id'] ?>)">
 							</p>					
 						</form>
 						<div id="form">
@@ -106,13 +106,18 @@
 											</div>
 										</div>
 										<?php if ($productArr[$typeRow['id']] != 0 ): ?>
-
 											<?php foreach ($productArr[$typeRow['id']] as $product): ?>
 
 												<div id="product" class="row" style="clear: left;">
+													<?php if($product['img'] != null){?>
 													<div class="col-md-2" style="float: left;">
 														<img src="../images/<?=$product['img']?>">
 													</div>
+												<?php }else { ?>
+													<div class="col-md-2" style="float: left;">
+														<img src="../images/default.png">
+													</div>
+												<?php } ?>
 													<p class="col-md-8 namePr" style="float: left;"><?=$product['name']?></p>
 													<p class="col-md-2 costPr" style="float: right;"><?=$product['price']?>.000đ</p>
 												</div>
@@ -123,7 +128,7 @@
 								<?php }endif ?>
 							</div>
 
-							<div>Menu của cửa hàng: "A Hải "</div>
+							<div>Menu của cửa hàng: "<?=$data['name']?>"</div>
 						</div>
 					</div>
 				</div>
@@ -170,4 +175,6 @@
 			$("#menu1").slideToggle("slow");
 		});
 	});
+</script>
+<script src="../js/search.js">
 </script>

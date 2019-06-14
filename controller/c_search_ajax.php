@@ -1,10 +1,8 @@
-<?php
-	if(!isset($_GET['id'])){
-		header("location:../controller/c_index.php");
-	}else{
-		$id = $_GET['id'];
-		
-		require_once("../view/header.php");
+<?php 
+	// if(!isset($_GET['id'])){
+	// 	header("location:../controller/c_index.php");
+	// }else{
+		$id = $_REQUEST['id'];
 		require_once("../model/m_foodshop.php");
 		require_once("../model/m_product.php");
 		require_once("../model/m_type_products.php");
@@ -12,7 +10,13 @@
 		$m_type_product = new TypeProduct();
 		//lấy dữ liệu theo id
 		$data = $m_foodshop->queryDetailsFoodShop($id);
-		$name_search = "1=1";
+		
+		// $name_search = "name like '%".$_REQUEST["q"]."%'";
+		if(!empty(trim($_REQUEST["q"]))){
+			$name_search = "name like '%".$_REQUEST["q"]."%'";
+		}else{
+			$name_search = "1=1";
+		}
 		$categoryData = $m_type_product->queryTypeId($id);
 		
 		$productArr = array();
@@ -25,18 +29,10 @@
 				$productArr[$key] = $val;
 			}
 		}
-		if($data==0){
-			header("location:c_index.php");
-		}
+		// if($data==0){
+		// 	header("location:c_index.php");
+		// }
 		
-		
-		require_once("../view/detail.php");
-		require_once("../view/footer.php");
-	}
-	?>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			document.title = '<?=$data['name']?>';
-		});
-	</script>
+	// }
+		require_once("../view/v_detail_search.php");
+?>
